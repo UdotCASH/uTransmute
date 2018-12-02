@@ -34,9 +34,9 @@ Typically, the way this has been done is by using what we call the &quot;snapsho
 
 通常情况下，实现上述要求我们是借助&quot;快照&quot;模式完成。
 
-In the ETHxEOS protocol, we are providing another option for ERC20 contracts that do not have a built-in pause/expiry function but who want to move their token to another chain. We are calling this action: teleportation. To teleport a token from one chain to another, it will exist on the destination chain, but no longer exist in a fungible form on the source chain.
+In the ETHxEOS protocol, we are providing another option for ERC20 contracts that do not have a built-in pause/expiry function but who want to move their token to another chain. We are calling this action: swapping. To swap a token from one chain to another, it will exist on the destination chain, but no longer exist in a fungible form on the source chain.
 
-在ETHxEOS协议里，我们为没有内置暂停/到期功能且不能满足想要跨链转移代币的用户的ERC20合约提供了另一种方式。我们将此需求称为：teleportation隐形转移。链间转移一个代币，此代币将存在于目的链，但在源链上不再以可替换形式存在。
+在ETHxEOS协议里，我们为没有内置暂停/到期功能且不能满足想要跨链转移代币的用户的ERC20合约提供了另一种方式。我们将此需求称为：swapping隐形转移。链间转移一个代币，此代币将存在于目的链，但在源链上不再以可替换形式存在。
 
 #### ETHxEOS协议有3个维度
 
@@ -48,7 +48,7 @@ The standard SwapTunnel contract has 2 functions - be authorized to receive toke
 
 标准的SwapTunnel合约有2个功能——授权从Ethereum接收Y个代币，然后接收EOS账户信息，通过Oracle在目的链上分配代币。
 
-Once a user sends their tokens and destination account to the SwapTunnel, the ERC20 tokens will become non-fungible and the EOS tokens will be teleported to their destination account on the EOS chain.
+Once a user sends their tokens and destination account to the SwapTunnel, the ERC20 tokens will become non-fungible and the EOS tokens will be swapped to their destination account on the EOS chain.
 
 一旦用户向SwapTunnel发送他们的代币和目的账户。此部分ERC20代币将变为不可替代的，并且EOS代币将在EOS链上转移到目的账户。
 
@@ -82,7 +82,7 @@ _ETHxEOS is open-source and we encourage you to customize, fork, and use the cod
 _ETHxEOS代码是开源的，我们鼓励所有人定制、派生和使用代码。我们建立它是作为一个基石。以下是我们的一些想法：_
 
 - ._可以修改ETHxEOS合约，使用注册EOS账户或钥匙来驱动快照分配。_
-- ._可以编写ETHxEOS&quot; __teleporter__&quot;或 __&quot;__ racle&quot;，从而完全在EOS链上运行（代替了 __js__ ），并且简化的支付认证过程（SPV）也可完全在链上进行。_
+- ._可以编写ETHxEOS&quot; __tswapper__&quot;或 __&quot;__ racle&quot;，从而完全在EOS链上运行（代替了 __js__ ），并且简化的支付认证过程（SPV）也可完全在链上进行。_
 - ._可以修改ETHxEOS合约，在Oracle成功将ETH代币转移至EOS后，通过将此部分ETH代币发送到0x00地址来完成代币燃烧。_
 - ._可以修改ETHxEOS合约，允许代币在传送点ETH_ _↔ __EOS间传送，通过使用__&quot; __2-通道__&quot;__代币，锁定代币不再是靠每条链单独的合约。_
 - ._ETHxEOS 可以在共享相同私匙的任何一个链上创建公匙。_
@@ -107,7 +107,7 @@ _我们的脚本自动化了一些流程，这是为了帮助您理解流程中�
 3. _ **部署swaptunnel合约。** __合约地址在truffle配置文件中自动更新。_
 4. **在**** Jungle Testnet ****部署标准eosio.token合约。**
 5. _ **通过eosio.token合约发行EOS代币。** __参数见_ [config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)_中配置。_
-6. **在**** js ****服务器上建立**** teleport\_oracle ****。**
+6. **在**** js ****服务器上建立**** swap\_oracle ****。**
 7. **源Ethereum账户必须进行2个操作。**
 
 -
@@ -182,7 +182,7 @@ _我们的脚本自动化了一些流程，这是为了帮助您理解流程中�
   - .erc20.approve(swaptunnel.address, 40000, {from:&#39;\&lt;ERC20PublicKey\&gt;&#39;})
   - ._这是 __0x52…__ 地址，上面的例子中的地址。您的地址会是不同的。_
 - .\*\*输入目的EOS账户地址进行代币转移\*\*
-  - .swaptunnel.teleport(&quot;\&lt;DestinationEOSAccount\&gt;&quot;)
+  - .swaptunnel.swap(&quot;\&lt;DestinationEOSAccount\&gt;&quot;)
   - ._您应该在您的oracle控制界面时刻查看账户活动。_
 - .\*\*在目的EOS账户中检查自定义EOS代币余额\*\*
   - .cleos -u http://dev.cryptolions.io:38888 get table \&lt;EOSTokenCreatorAccount\&gt; \&lt;DestinationEOSAccount\&gt; accounts

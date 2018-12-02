@@ -17,14 +17,14 @@ contract('SwapTunnelEosPublicKey', accounts => {
     const criticBlock = 0;
     const eosPublicKey = 'EOS7M38bvCoL7N3mBDbQyqePcK128G2b3so7XBa9hJn9uuKDN7we8';
 
-    it('teleport', async () => {
+    it('swap', async () => {
         const erc20Token = await ERC20Token.new(name, symbol, tokens, decimals);
         const swapTunnel = await SwapTunnelEosPublicKey.new(erc20Token.address, criticBlock, minimumAmount);
 
-        let watcher = swapTunnel.Teleport();
+        let watcher = swapTunnel.Swap();
 
         await erc20Token.approve(swapTunnel.address, 10000000000);
-        await swapTunnel.teleport(eosPublicKey);
+        await swapTunnel.swap(eosPublicKey);
         const swapTunnelBalance = await erc20Token.balanceOf(swapTunnel.address);
         swapTunnelBalance.should.be.bignumber.equal(10000000000);
         const balance = await erc20Token.balanceOf(accounts[0]);

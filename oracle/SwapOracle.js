@@ -9,7 +9,7 @@ module.exports = (params) => {
         }
     })
 
-    swapTunnel.events.Teleport({
+    swapTunnel.events.Swap({
 //        fromBlock: 0
     })
         .on('data', event => {
@@ -19,8 +19,8 @@ module.exports = (params) => {
             else
                 console.log("(II) swapTunnel event " + event.returnValues);
         })
-        .on('changed', reason => console.log("(WW) TeleportOracle: " + reason))
-        .on('error', reason => console.log("(EE) TeleportOracle: " + reason));
+        .on('changed', reason => console.log("(WW) SwapOracle: " + reason))
+        .on('error', reason => console.log("(EE) SwapOracle: " + reason));
 
     swapTunnel.events.Closed({
     })
@@ -28,6 +28,6 @@ module.exports = (params) => {
             console.log("(END) swapTunnel closed ... exiting");
             process.exit(0);
         })
-        .on('changed', reason => console.log("(WW) TeleportOracle: " + reason))
-        .on('error', reason => console.log("(EE) TeleportOracle: " + reason));
+        .on('changed', reason => console.log("(WW) SwapOracle: " + reason))
+        .on('error', reason => console.log("(EE) SwapOracle: " + reason));
 }

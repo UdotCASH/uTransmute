@@ -3,9 +3,9 @@ const Web3 = require('web3');
 const EosJs = require('eosjs');
 const check = require('./utils/Check');
 
-const createWormHole = require('./oracle/TeleportOracle.js');
+const createWormHole = require('./oracle/SwapOracle.js');
 
-console.log("ERC20 teleporting starts ...");
+console.log("ERC20 swapping starts ...");
 
 const getParams = () => {
     const argv = require('minimist')(process.argv.slice(2), {
@@ -72,7 +72,7 @@ eos.getInfo({})
                         const amountFloat = (amount/10**decimals).toFixed(decimals);
                         const amountWithSymbol = amountFloat + " " + symbol;
                         console.log("(EVENT) amount=" + amountWithSymbol + ", to=" + note);
-                        
+
                         eosioToken.issue(note, amountWithSymbol, "Emerged from eosioToken")
                             .catch(console.error);
                     }
@@ -84,4 +84,3 @@ eos.getInfo({})
                 process.exit();
             });
     });
-

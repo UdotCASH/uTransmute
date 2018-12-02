@@ -15,8 +15,8 @@ contract SwapTunnelEosAccount is EosValidator, SwapTunnel{
 
     /** @dev It deadlocks your tokens and emit an event with amount and EOS account.
      */
-    function teleport(string eosAccount) public {
+    function swap(string eosAccount) public {
         require(isValidAccount(eosAccount), "not valid EOS account");
-        super.teleport(eosAccount);
+        super.swap(eosAccount);
     }
 }

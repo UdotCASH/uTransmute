@@ -1,5 +1,5 @@
-# ETHxEO SwapTunnel
-Teleport your ERC20 tokens to EOS.
+# ETHxEOS Protocol
+Swap your ERC20 tokens to EOS.
 
 ## Summary
 
@@ -25,7 +25,7 @@ We believe that any token should be able to move as the developers desire or req
 
 Typically, the way this has been done is by using what we call the "snapshot" method. 📸  This method is commonly used by token "airdrops" to send to accounts on ETH or EOS chains that match certain criteria such as having an address with at least X balance of the chain's native token. The EOS native token generation from the ERC20 was a snapshot airdrop. EOS was able to do this by expiring their ERC20 contract thereby making the ERC20 EOS tokens non-fungible.
 
-In the ETHxEOS protocol, we are providing another option for ERC20 contracts that do not have a built-in pause/expiry function but who want to move their token to another chain. We are calling this action: teleportation. To teleport a token from one chain to another, it will exist on the destination chain, but no longer exist in a fungible form on the source chain.
+In the ETHxEOS protocol, we are providing another option for ERC20 contracts that do not have a built-in pause/expiry function but who want to move their token to another chain. We are calling this action: swapping. To swap a token from one chain to another, it will exist on the destination chain, but no longer exist in a fungible form on the source chain.
 
 #### The ETHxEOS Protocol has 3 Dimensions
 
@@ -35,18 +35,18 @@ In the ETHxEOS protocol, we are providing another option for ERC20 contracts tha
 
 The standard SwapTunnel contract has 2 functions - be authorized to receive token Y from Ethereum and then receive the EOS account info the tokens to be distributed on the destination chain via the Oracle.
 
-Once a user sends their tokens and destination account to the SwapTunnel, the ERC20 tokens will become non-fungible and the EOS tokens will be teleported to their destination account on the EOS chain.
+Once a user sends their tokens and destination account to the SwapTunnel, the ERC20 tokens will become non-fungible and the EOS tokens will be swapped to their destination account on the EOS chain.
 
 The developer can choose to either send the tokens to a 0X000 address and thereby 🔥 them, or hold them in the SwapTunnel contract.
 
 
 ##### ETHxEOS Github Inventory
-* **ETHxEOS/ETHxEOS.js** - Oracle for managing teleportation of tokens from ETH to EOS
+* **ETHxEOS/ETHxEOS.js** - Oracle for managing swapping of tokens from ETH to EOS
 * **ETHxEOS/[config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)** - configuration file for swaptunnel and oracle contracts
 * **ETHxEOS/swaptunnel/contracts/** - swaptunnel contracts listed below
     * **SwapTunnel.sol**	- swaptunnel contract that will attract ERC20 tokens
-    * **SwapTunnelEosAccount.sol**	- swaptunnel contract that takes an EOS Account as an input to activate a teleportation
-    * **SwapTunnelEosPublicKey.sol** - takes an EOS public key as an input to activate a teleportation (you will need to create  accounts using a modified oracle for account creation)
+    * **SwapTunnelEosAccount.sol**	- swaptunnel contract that takes an EOS Account as an input to activate a swapping
+    * **SwapTunnelEosPublicKey.sol** - takes an EOS public key as an input to activate a swapping (you will need to create  accounts using a modified oracle for account creation)
     * **TestERC20Token.sol** - used to specify ElementToken.sol for test deployments
     * **TestElementToken.sol** - default ElementToken contract for ERC20 tokens
     * **EosValidator.sol** - validates EOS account or key
@@ -65,9 +65,9 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md)
 *ETHxEOS is open-source and we encourage you to customize, fork, and use the code. We built this as a example case. Some of the ideas we have include:*
 
 * *ETHxEOS contracts could be modified to power a snapshot distribution using registration of EOS accounts or keys.*
-* *ETHxEOS "teleporter" or "oracle" could be written to run entirely on an EOS chain (instead of node.js) and simplified payment verification (SPV) could be done entirely on-chain.*
+* *ETHxEOS "swapper" or "oracle" could be written to run entirely on an EOS chain (instead of node.js) and simplified payment verification (SPV) could be done entirely on-chain.*
 * *ETHxEOS contracts could be modified to burn ETH tokens by sending them to a 0x00 address after the Oracle successfully moves them to EOS.*
-* *ETHxEOS could be modified to allow tokens to travel both ways in the Teleporter ETH ↔ EOS by using a "2-way-peg" of tokens - locking the tokens inside of a contract on each chain.*
+* *ETHxEOS could be modified to allow tokens to travel both ways in the Swaper ETH ↔ EOS by using a "2-way-peg" of tokens - locking the tokens inside of a contract on each chain.*
 * *ETHxEOS could create public keys on either chain which share the same private key.*
 * *ETHxEOS could be used to authenticate ETH transactions using EOS or vice-versa.*
 * *ETHxEOS can be used to move tokens between EOS sister-chains.*
@@ -87,10 +87,10 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md)
 3. **Deploy swaptunnel contract.** *Contract address will automatically update in the truffle config file).*
 4. **Deploy standard eosio.token contract on Jungle Testnet.**
 5. **Issue EOS token via eosio.token contract.** *Parameters are configured in [config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)*
-6. **Start teleport_oracle on node.js server.**
+6. **Start swap_oracle on node.js server.**
 7. **Source Ethereum account must send 2 actions.**
-    * Authorize swaptunnel to teleport an amount of ERC20 tokens.
-    * Send EOS account name to activate teleportation.
+    * Authorize swaptunnel to swap an amount of ERC20 tokens.
+    * Send EOS account name to activate swapping.
 8. **Oracle will catch the event on Ethereum and send the tokens to the EOS account specified in step 7.**
 9. **Close swaptunnel.**
 
@@ -165,7 +165,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md)
 * ** Issue custom EOS Token via eosio.token contract** *You may need to unlock wallet first)*
 `cleos -u http://dev.cryptolions.io:38888 push action <EOSTokenCreatorAccount> create '["<EOSTokenCreatorAccount>","4.0000 <EOSTokenName>"]' -p <EOSTokenCreatorAccount>@active`
 
-## Step 4: Test Teleportation
+## Step 4: Test Swap
 * ** Enter ganache console**
   * `truffle console --network ganache`
 
@@ -186,15 +186,15 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md)
     * *this is the 0x52... address from the example above, your address will be different.*
 
 
-* ** Teleport tokens by entering destination EOS account**
-    * `swaptunnel.teleport("<DestinationEOSAccount>")`
+* ** Swap tokens by entering destination EOS account**
+    * `swaptunnel.swap("<DestinationEOSAccount>")`
     *  *You should see the action happen in the console of your oracle!*
 
 
 * ** Check balance of Custom EOS Tokens in the Destination EOS account**
     *  `cleos -u http://dev.cryptolions.io:38888 get table <EOSTokenCreatorAccount> <DestinationEOSAccount> accounts`
 
-### Your test tokens have been teleported!
+### Your test tokens have been swapped!
 
 
 # Mainnet Deployment
@@ -221,8 +221,8 @@ SOFTWARE.
     * `account` is the account that has transfer permission of your issued EOS token address
     * `private_key` private key that can has permission to transfer the EOS token
 * Install `ETHxEOS/swaptunnel/contracts/SwapTunnelEosAccount.sol` or `swaptunnel/contracts/SwapTunnelEosPublicKey.sol` on Ethereum mainnet
-* Start the Oracle 🔮 ETHxEOS/oracle/TeleportOracle.js
-* From an Ethereum account containing tokens you want to teleport, authorize the swaptunnel to attract tokens from your account, then send your EOS account name to the contract "teleport" action to initiate the movement of tokens to EOS. *This process could be made really simple through very good UX/UI design for an interface.*
+* Start the Oracle 🔮 ETHxEOS/oracle/SwapOracle.js
+* From an Ethereum account containing tokens you want to swap, authorize the swaptunnel to attract tokens from your account, then send your EOS account name to the contract "swap" action to initiate the movement of tokens to EOS. *This process could be made really simple through very good UX/UI design for an interface.*
 
 # Fork of EOS21 Protocol by shEOS
 

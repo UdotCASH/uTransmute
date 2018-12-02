@@ -15,8 +15,8 @@ contract SwapTunnelEosPublicKey is EosValidator, SwapTunnel{
 
     /** @dev It deadlocks your tokens and emit an event with amount and EOS public key.
      */
-    function teleport(string eosPublicKey) public {
+    function swap(string eosPublicKey) public {
         require(isValidKey(eosPublicKey), "not valid EOS public key");
-        super.teleport(eosPublicKey);
+        super.swap(eosPublicKey);
     }
 }

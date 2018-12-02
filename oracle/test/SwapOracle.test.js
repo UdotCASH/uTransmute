@@ -4,7 +4,7 @@ const EthCrypto = require('eth-crypto');
 const fs = require('fs');
 require('chai').use(require('chai-as-promised')).should();
 
-const wormHole = require('../TeleportOracle.js');
+const wormHole = require('../SwapOracle.js');
 const erc20Deployer = require('./ERC20Deployer.js');
 const swapTunnelDeployer = require('./SwapTunnelDeployer.js');
 
@@ -24,7 +24,7 @@ const ganacheProvider = ganache.provider({
 // set ganache to web3 as provider
 const web3 = new Web3(ganacheProvider);
 
-describe('teleport ERC20 tokens', () => {
+describe('swap ERC20 tokens', () => {
     let erc20Contract;
     let swapTunnelContract;
 
@@ -78,14 +78,14 @@ describe('teleport ERC20 tokens', () => {
             await erc20Contract.methods.approve(swapTunnelContract.options.address, amount).send({ from: identities[i].address , gas: 3000000});
             const allowed = await erc20Contract.methods.allowance(identities[i].address, swapTunnelContract.options.address).call();
             allowed.should.be.equal(amount);
-            await swapTunnelContract.methods.teleport("te.mgr5ymass").send({ from: identities[i].address , gas: 3000000});
+            await swapTunnelContract.methods.swap("te.mgr5ymass").send({ from: identities[i].address , gas: 3000000});
             result = await erc20Contract.methods.balanceOf(identities[i].address).call({ from: identities[i].address , gas: 3000000});
             result.should.be.equal('0');
         }
         count.should.be.equal(identitiesCount);
     });
 
-    it('wormhole gets past teleportations', async () => {
+    it('wormhole gets past swapping', async () => {
         let count = 0;
         wormHole({ swapTunnel: swapTunnelContract, onData: () => count++ });
 
@@ -94,7 +94,7 @@ describe('teleport ERC20 tokens', () => {
             await erc20Contract.methods.approve(swapTunnelContract.options.address, tokenBalance).send({ from: identities[i].address , gas: 3000000});
             const allowed = await erc20Contract.methods.allowance(identities[i].address, swapTunnelContract.options.address).call();
             allowed.should.be.equal(tokenBalance);
-            await swapTunnelContract.methods.teleport("te.mgr5ymass").send({ from: identities[i].address , gas: 3000000});
+            await swapTunnelContract.methods.swap("te.mgr5ymass").send({ from: identities[i].address , gas: 3000000});
             tokenBalance = await erc20Contract.methods.balanceOf(identities[i].address).call({ from: identities[i].address , gas: 3000000});
             tokenBalance.should.be.equal('0');
         }
@@ -102,4 +102,3 @@ describe('teleport ERC20 tokens', () => {
         count.should.be.equal(2);
     });
 });
-

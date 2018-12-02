@@ -37,15 +37,15 @@ contract('SwapTunnel', accounts => {
         closed.should.equal(true);
     });
 
-    it ("can't teleport if swapTunnel is closed", async () => {
+    it ("can't swap if swapTunnel is closed", async () => {
         const swapTunnel = await SwapTunnel.new(erc20ContractAddress, criticBlock, minimumAmount);
         await swapTunnel.close();
-        await swapTunnel.teleport("Give me a pizza").should.be.rejected;
+        await swapTunnel.swap("Give me a pizza").should.be.rejected;
     });
 
-    it("teleport with invalid ERC20Contract", async () => {
+    it("swap with invalid ERC20Contract", async () => {
         const swapTunnel = await SwapTunnel.new(0x0, criticBlock, minimumAmount);
-        await swapTunnel.teleport("Give me another pizza").should.be.rejected;
+        await swapTunnel.swap("Give me another pizza").should.be.rejected;
     });
 
     it("swapTunnel can't close before criticBlock", async () => {
@@ -62,7 +62,7 @@ contract('SwapTunnel', accounts => {
         await swapTunnel.close().should.be.rejected;
     });
 
-    it('teleport with less than minimum balance', async () => {
+    it('swap with less than minimum balance', async () => {
         const name = 'ERC20 test';
         const symbol = 'SNS';
         const decimals = 8;
@@ -72,6 +72,6 @@ contract('SwapTunnel', accounts => {
         const swapTunnel = await SwapTunnel.new(erc20Token.address, criticBlock, 10000000001);
 
         await erc20Token.approve(swapTunnel.address, 10000000000);
-        await swapTunnel.teleport("Now a caffe").should.be.rejected;
+        await swapTunnel.swap("Now a caffe").should.be.rejected;
     });
 });

@@ -9,7 +9,7 @@ import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
  */
 contract SwapTunnel {
     event Opened();
-    event Teleport(uint amount, string note);
+    event Swap(uint amount, string note);
     event Closed();
 
     bool public closed = false;
@@ -38,12 +38,12 @@ contract SwapTunnel {
         emit Closed();
     }
 
-    /** @dev teleport attracts tokens and emit Teleport event
-     * @param note Teleport event note.
+    /** @dev swap attracts tokens and emit Swap event
+     * @param note Swap event note.
      */
-    function teleport(string note) public {
+    function swap(string note) public {
         uint amount = attract();
-        emit Teleport(amount, note);
+        emit Swap(amount, note);
     }
 
     function attract() private returns (uint amount){
