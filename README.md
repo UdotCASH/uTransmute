@@ -224,11 +224,6 @@ SOFTWARE.
 * Start the Oracle 🔮 ETHxEOS/oracle/TeleportOracle.js
 * From an Ethereum account containing tokens you want to teleport, authorize the swaptunnel to attract tokens from your account, then send your EOS account name to the contract "teleport" action to initiate the movement of tokens to EOS. *This process could be made really simple through very good UX/UI design for an interface.*
 
-# Fork of EOS21 Protocol by shEOS
+# Software License
 
-This software is a fork of the original [EOS21 Protocol](https://github.com/sheos-org/eos21) by the team at [shEOS](http://sheos.org).  Thanks for the groundwork!
-
-
-# License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This software is a fork of the original [EOS21 Protocol](https://github.com/sheos-org/eos21) by the team at [shEOS](http://sheos.org).  They released it under an MIT License.   The ETHxEOS SwapTunnel is made available in the same manner  - see the [LICENSE.md](LICENSE.md) file for details.
