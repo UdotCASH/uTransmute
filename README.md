@@ -1,5 +1,5 @@
 # ETHxEO SwapTunnel
-Swap your ERC20 tokens to EOS.
+Swap your ERC20 tokens to EOS tokens.
 
 ## Summary
 
