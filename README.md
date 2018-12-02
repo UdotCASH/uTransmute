@@ -1,4 +1,4 @@
-# ETHxEO SwapTunnel
+# ETHxEOS SwapTunnel
 Swap your ERC20 tokens to EOS tokens.
 
 ## Summary
@@ -35,7 +35,7 @@ In the ETHxEOS protocol, we are providing another option for ERC20 contracts tha
 
 The standard SwapTunnel contract has 2 functions - be authorized to receive token Y from Ethereum and then receive the EOS account info the tokens to be distributed on the destination chain via the Oracle.
 
-Once a user sends their tokens and destination account to the SwapTunnel, the ERC20 tokens will become non-fungible and the EOS tokens will be teleported to their destination account on the EOS chain.
+Once a user sends their tokens and destination account to the SwapTunnel, the ERC20 tokens will become non-fungible and the EOS tokens will be swapped to their destination account on the EOS chain.
 
 The developer can choose to either send the tokens to a 0X000 address and thereby 🔥 them, or hold them in the SwapTunnel contract.
 
@@ -65,7 +65,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md)
 *ETHxEOS is open-source and we encourage you to customize, fork, and use the code. We built this as a example case. Some of the ideas we have include:*
 
 * *ETHxEOS contracts could be modified to power a snapshot distribution using registration of EOS accounts or keys.*
-* *ETHxEOS "teleporter" or "oracle" could be written to run entirely on an EOS chain (instead of node.js) and simplified payment verification (SPV) could be done entirely on-chain.*
+* *ETHxEOS "swapper" or "oracle" could be written to run entirely on an EOS chain (instead of node.js) and simplified payment verification (SPV) could be done entirely on-chain.*
 * *ETHxEOS contracts could be modified to burn ETH tokens by sending them to a 0x00 address after the Oracle successfully moves them to EOS.*
 * *ETHxEOS could be modified to allow tokens to travel both ways in the Swaper ETH ↔ EOS by using a "2-way-peg" of tokens - locking the tokens inside of a contract on each chain.*
 * *ETHxEOS could create public keys on either chain which share the same private key.*
@@ -194,7 +194,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md)
 * ** Check balance of Custom EOS Tokens in the Destination EOS account**
     *  `cleos -u http://dev.cryptolions.io:38888 get table <EOSTokenCreatorAccount> <DestinationEOSAccount> accounts`
 
-### Your test tokens have been teleported!
+### Your test tokens have been swapped!
 
 
 # Mainnet Deployment
@@ -224,11 +224,7 @@ SOFTWARE.
 * Start the Oracle 🔮 ETHxEOS/oracle/SwapOracle.js
 * From an Ethereum account containing tokens you want to swap, authorize the swaptunnel to attract tokens from your account, then send your EOS account name to the contract "swap" action to initiate the movement of tokens to EOS. *This process could be made really simple through very good UX/UI design for an interface.*
 
-# Fork of EOS21 Protocol by shEOS
 
-This software is a fork of the original [EOS21 Protocol](https://github.com/sheos-org/eos21) by the team at [shEOS](http://sheos.org).  Thanks for the groundwork!
+# Software License
 
-
-# License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This software is a fork of the original [EOS21 Protocol](https://github.com/sheos-org/eos21) by the team at [shEOS](http://sheos.org) released under an MIT License.  This project is made available under the same license for the community - see the [LICENSE.md](LICENSE.md) file for details.
