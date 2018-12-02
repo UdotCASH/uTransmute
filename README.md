@@ -226,4 +226,4 @@ SOFTWARE.
 
 # Software License
 
-This software is a fork of the original [EOS21 Protocol](https://github.com/sheos-org/eos21) by the team at [shEOS](http://sheos.org).  They released it under an MIT License.   The ETHxEOS SwapTunnel is made available in the same manner  - see the [LICENSE.md](LICENSE.md) file for details.
+This software is a fork of the original [EOS21 Protocol](https://github.com/sheos-org/eos21) developed by the team at [shEOS](http://sheos.org) under an MIT License.   The ETHxEOS SwapTunnel is made available in the same manner - see the [LICENSE.md](LICENSE.md) file for details.
