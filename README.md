@@ -1,5 +1,5 @@
-# ETHxEO SwapTunnel
-Swap your ERC20 tokens to EOS.
+# ETHxEOS SwapTunnel
+Swap your ERC20 tokens to EOS tokens.
 
 ## Summary
 
@@ -224,11 +224,7 @@ SOFTWARE.
 * Start the Oracle 🔮 ETHxEOS/oracle/SwapOracle.js
 * From an Ethereum account containing tokens you want to swap, authorize the swaptunnel to attract tokens from your account, then send your EOS account name to the contract "swap" action to initiate the movement of tokens to EOS. *This process could be made really simple through very good UX/UI design for an interface.*
 
-# Fork of EOS21 Protocol by shEOS
 
-This software is a fork of the original [EOS21 Protocol](https://github.com/sheos-org/eos21) by the team at [shEOS](http://sheos.org).  Thanks for the groundwork!
+# Software License
 
-
-# License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This software is a fork of the original [EOS21 Protocol](https://github.com/sheos-org/eos21) by the team at [shEOS](http://sheos.org) released under an MIT License.  This project is made available under the same license for the community - see the [LICENSE.md](LICENSE.md) file for details.
