@@ -165,7 +165,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md)
 * ** Issue custom EOS Token via eosio.token contract** *You may need to unlock wallet first)*
 `cleos -u http://dev.cryptolions.io:38888 push action <EOSTokenCreatorAccount> create '["<EOSTokenCreatorAccount>","4.0000 <EOSTokenName>"]' -p <EOSTokenCreatorAccount>@active`
 
-## Step 4: Test Swapation
+## Step 4: Test Swap
 * ** Enter ganache console**
   * `truffle console --network ganache`
 
