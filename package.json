@@ -6,7 +6,7 @@
   "directories": {
     "test": "test"
   },
-  "author": "Alessandro Siniscalchi",
+  "author": "Initially coded as a BlackHole contract by Alessandro Siniscalchi (EOS21 Protocol - shEOS.org)",
   "license": "ISC",
   "dependencies": {
     "chai": "^4.2.0",
@@ -20,7 +20,7 @@
     "openzeppelin-solidity": "^1.12.0",
     "web3": "^1.0.0-beta.36"
   },
-  "scripts": {		  
+  "scripts": {
     "swaptunnel_test": "cd swaptunnel && truffle test",
     "oracle_test": "cd oracle && mocha",
     "start": "nodejs ./ETHxEOS.js",

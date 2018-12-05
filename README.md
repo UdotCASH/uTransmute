@@ -9,7 +9,7 @@ ETHxEOS is a protocol to enable cross-chain ⛓ token movement between ETH and E
 
 The goal of this protocol is to provide a standard for app developers to move their tokens and apps between chains.
 
-Join the main [U.CASH Telegram group](https://t.me/ucash) to discuss ETHxEOS.
+Join the main [U.CASH Telegram group](https://t.me/ucash) to discuss ETHxEOS and its impact on the greater ecosystem.
 
 ## Built With
 * [EOS.IO](https://github.com/EOSIO/eos) - EOS Blockchain
@@ -30,7 +30,7 @@ In the ETHxEOS protocol, we are providing another option for ERC20 contracts tha
 #### The ETHxEOS Protocol has 3 Dimensions
 
 * **Dimension 1** is on the source chain, Ethereum. There is a SwapTunnel 🌌 contract on ETH to perform the absorption of ERC20 tokens and also to receive account information for the destination chain (EOS). This information can either be configured to use the EOS Account name or an EOS Public Key. In the second case, the oracle must be changed to create an EOS account for the user.
-* **Dimension 2** is an Oracle 🔮 program that runs off-chain to watch the ETH transactions and authorize the distribution of EOS tokens (in a future version of this protocol, this could be run entirely on EOS or on a larger group of off-chain oracles).
+* **Dimension 2** is an Oracle 🔮 program that runs off-chain to watch the ETH transactions and authorize the distribution of EOS tokens (in a future version of this protocol, the Oracle could be run entirely on EOS).
 * **Dimension 3** is the destination chain, EOS. The EOS token contract which distributes the tokens to the 📩  destination EOS account sent by the token holders in Layer 1.
 
 The standard SwapTunnel contract has 2 functions - be authorized to receive token Y from Ethereum and then receive the EOS account info the tokens to be distributed on the destination chain via the Oracle.
@@ -60,14 +60,14 @@ The developer can choose to either send the tokens to a 0X000 address and thereb
 
 # Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md)
+Please read [CONTRIBUTING.md](https://github.com/UdotCASH/ETHxEOS/CONTRIBUTING.md)
 
 *ETHxEOS is open-source and we encourage you to customize, fork, and use the code. We built this as a example case. Some of the ideas we have include:*
 
 * *ETHxEOS contracts could be modified to power a snapshot distribution using registration of EOS accounts or keys.*
 * *ETHxEOS "swapper" or "oracle" could be written to run entirely on an EOS chain (instead of node.js) and simplified payment verification (SPV) could be done entirely on-chain.*
 * *ETHxEOS contracts could be modified to burn ETH tokens by sending them to a 0x00 address after the Oracle successfully moves them to EOS.*
-* *ETHxEOS could be modified to allow tokens to travel both ways in the Swaper ETH ↔ EOS by using a "2-way-peg" of tokens - locking the tokens inside of a contract on each chain.*
+* *ETHxEOS could be modified to allow tokens to travel both ways in the Swapper ETH ↔ EOS by using a "2-way-peg" of tokens - locking the tokens inside of a contract on each chain.*
 * *ETHxEOS could create public keys on either chain which share the same private key.*
 * *ETHxEOS could be used to authenticate ETH transactions using EOS or vice-versa.*
 * *ETHxEOS can be used to move tokens between EOS sister-chains.*
