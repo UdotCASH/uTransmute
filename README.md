@@ -3,11 +3,11 @@ Swap your ERC20 tokens to EOS tokens.
 
 ## Summary
 
-ETHxEOS is a protocol to enable cross-chain ⛓ token movement between ETH and EOS.
+ETHxEOS is a protocol to enable cross-chain ⛓ token swapping between ETH and EOS.
 
 * ETH (ERC20)  --> ETHxEOS --> EOS (tokens)
 
-The goal of this protocol is to provide a standard for app developers to move their tokens and apps between chains.
+The goal of this protocol is to provide a standard for app developers to move their tokens and apps between chains, enabling greater decentralization, redundancy and usage.
 
 Join the main [U.CASH Telegram group](https://t.me/ucash) to discuss ETHxEOS and its impact on the greater ecosystem.
 
