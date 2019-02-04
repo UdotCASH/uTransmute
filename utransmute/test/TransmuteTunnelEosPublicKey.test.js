@@ -4,10 +4,10 @@ require('chai')
     .use(require('chai-as-promised'))
     .should();
 
-const SwapTunnelEosPublicKey = artifacts.require('SwapTunnelEosPublicKey');
+const uTransmuteEosPublicKey = artifacts.require('uTransmuteEosPublicKey');
 const ERC20Token = artifacts.require('ERC20Token');
 
-contract('SwapTunnelEosPublicKey', accounts => {
+contract('uTransmuteEosPublicKey', accounts => {
     const name = 'ERC20 test';
     const symbol = 'SNS';
     const decimals = 8;
@@ -17,16 +17,16 @@ contract('SwapTunnelEosPublicKey', accounts => {
     const criticBlock = 0;
     const eosPublicKey = 'EOS7M38bvCoL7N3mBDbQyqePcK128G2b3so7XBa9hJn9uuKDN7we8';
 
-    it('swap', async () => {
+    it('transmute', async () => {
         const erc20Token = await ERC20Token.new(name, symbol, tokens, decimals);
-        const swapTunnel = await SwapTunnelEosPublicKey.new(erc20Token.address, criticBlock, minimumAmount);
+        const uTransmute = await uTransmuteEosPublicKey.new(erc20Token.address, criticBlock, minimumAmount);
 
-        let watcher = swapTunnel.Swap();
+        let watcher = uTransmute.Transmute();
 
-        await erc20Token.approve(swapTunnel.address, 10000000000);
-        await swapTunnel.swap(eosPublicKey);
-        const swapTunnelBalance = await erc20Token.balanceOf(swapTunnel.address);
-        swapTunnelBalance.should.be.bignumber.equal(10000000000);
+        await erc20Token.approve(uTransmute.address, 10000000000);
+        await uTransmute.transmute(eosPublicKey);
+        const uTransmuteBalance = await erc20Token.balanceOf(uTransmute.address);
+        uTransmuteBalance.should.be.bignumber.equal(10000000000);
         const balance = await erc20Token.balanceOf(accounts[0]);
         balance.should.be.bignumber.equal(0);
 

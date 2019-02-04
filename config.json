@@ -1,5 +1,5 @@
 {
-    "swaptunnel": {
+    "utransmute": {
         "websocket_provider": "ws://127.0.0.1:8545",
         "critic_block": "0",
         "minimum_amount": "100",

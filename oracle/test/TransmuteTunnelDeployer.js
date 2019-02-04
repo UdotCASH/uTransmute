@@ -11,7 +11,7 @@ module.exports = (argv) => {
     const contract = JSON.parse(input.toString());
 
     // Create Contract proxy class
-    const SwapTunnel = new web3.eth.Contract(contract.abi);
+    const uTransmute = new web3.eth.Contract(contract.abi);
 
     check(argv.sender, "sender: " + argv.sender);
     check(argv.gas, "gas: " + argv.gas);
@@ -20,7 +20,7 @@ module.exports = (argv) => {
     check(argv.minimum_amount | argv.minimum_amount === 0, "minimum_amount: " + argv.minimum_amount);
 
     console.log("(II) start deployment ...");
-    return SwapTunnel.deploy({
+    return uTransmute.deploy({
         data: contract.bytecode,
         arguments: [argv.erc20_address, argv.critic_block, argv.minimum_amount]
     })
@@ -32,9 +32,9 @@ module.exports = (argv) => {
         .on('transactionHash', transactionHash => console.log("(II) transactionHash: " + transactionHash))
         .on('receipt', receipt => console.log("(II) address: ", receipt.contractAddress)) // contains the new contract address
         .on('confirmation', (confirmationNumber, receipt) => console.log("(II) confirmation: " + confirmationNumber))
-        .then(swapTunnel => {
+        .then(uTransmute => {
             console.log("(II) ... done");
-            return swapTunnel;
+            return uTransmute;
         })
         .catch(reason => {
             console.error(reason);

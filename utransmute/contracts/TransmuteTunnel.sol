@@ -2,14 +2,14 @@ pragma solidity ^0.4.22;
 
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
-/** @title SwapTunnel 
+/** @title uTransmute 
  * 
- * @dev Implementation of the SwapTunnel contract.
+ * @dev Implementation of the uTransmute contract.
  * It deadlocks ERC20 tockens and emit events on success.
  */
-contract SwapTunnel {
+contract uTransmute {
     event Opened();
-    event Swap(uint amount, string note);
+    event Transmute(uint amount, string note);
     event Closed();
 
     bool public closed = false;
@@ -17,10 +17,10 @@ contract SwapTunnel {
     uint public criticBlock;
     uint public minimumAmount;
 
-    /** @dev Construction of the ETH SwapTunnel contract.
+    /** @dev Construction of the ETH uTransmute contract.
      * @param _erc20Contract The address of the ERC20 contract to attract tockens from.
-     * @param _criticBlock SwapTunnel can be closed after it.
-     * @param _minimumAmount the smallest amount SwapTunnel can attract.
+     * @param _criticBlock uTransmute can be closed after it.
+     * @param _minimumAmount the smallest amount uTransmute can attract.
      */
     constructor(address _erc20Contract, uint _criticBlock, uint _minimumAmount) public {
         erc20Contract = ERC20(_erc20Contract);
@@ -29,30 +29,30 @@ contract SwapTunnel {
         emit Opened();
     }
 
-    /** @dev It closes the SwapTunnel if critical block has been reached.
+    /** @dev It closes the uTransmute if critical block has been reached.
      */
     function close() public {
-        require(!closed, "This SwapTunnel contract's active period has expired.");
-        require(block.number >= criticBlock, "SwapTunnel hasn't reached the critical mass");
+        require(!closed, "This uTransmute contract's active period has expired.");
+        require(block.number >= criticBlock, "uTransmute hasn't reached the critical mass");
         closed = true;
         emit Closed();
     }
 
-    /** @dev swap attracts tokens and emit Swap event
-     * @param note Swap event note.
+    /** @dev transmute attracts tokens and emit Transmute event
+     * @param note Transmute event note.
      */
-    function swap(string note) public {
+    function transmute(string note) public {
         uint amount = attract();
-        emit Swap(amount, note);
+        emit Transmute(amount, note);
     }
 
     function attract() private returns (uint amount){
-        require(!closed, "swapTunnel closed");
+        require(!closed, "uTransmute closed");
         uint balance = erc20Contract.balanceOf(msg.sender);
         uint allowed = erc20Contract.allowance(msg.sender, address(this));
         require(allowed >= minimumAmount, "less than minimum amount");
-        require(balance == allowed, "swapTunnel must attract all your tokens");
-        require(erc20Contract.transferFrom(msg.sender, address(this), balance), "swapTunnel can't attract your tokens");
+        require(balance == allowed, "uTransmute must attract all your tokens");
+        require(erc20Contract.transferFrom(msg.sender, address(this), balance), "uTransmute can't attract your tokens");
         return balance;
     }
 }

@@ -2,5 +2,5 @@ node_modules/
 build/
 .DS_Store
 CMakeLists.txt.user
-swaptunnel_address
+utransmute_address
 erc20_address

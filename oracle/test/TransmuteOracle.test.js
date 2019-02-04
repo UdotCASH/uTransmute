@@ -4,9 +4,9 @@ const EthCrypto = require('eth-crypto');
 const fs = require('fs');
 require('chai').use(require('chai-as-promised')).should();
 
-const wormHole = require('../SwapOracle.js');
+const wormHole = require('../TransmuteOracle.js');
 const erc20Deployer = require('./ERC20Deployer.js');
-const swapTunnelDeployer = require('./SwapTunnelDeployer.js');
+const uTransmuteDeployer = require('./uTransmuteDeployer.js');
 
 
 var identities = []
@@ -24,15 +24,15 @@ const ganacheProvider = ganache.provider({
 // set ganache to web3 as provider
 const web3 = new Web3(ganacheProvider);
 
-describe('swap ERC20 tokens', () => {
+describe('transmute ERC20 tokens', () => {
     let erc20Contract;
-    let swapTunnelContract;
+    let uTransmuteContract;
 
     beforeEach(async () => {
         // deploy ERC20 contract
         erc20Contract = await erc20Deployer({
             http_provider: ganacheProvider,
-            contract_file: '../swaptunnel/build/contracts/ERC20Token.json',
+            contract_file: '../utransmute/build/contracts/ERC20Token.json',
             sender: identities[0].address,
             gas: 3000000,
             gasPrice: 20,
@@ -43,10 +43,10 @@ describe('swap ERC20 tokens', () => {
         });
         erc20Contract.should.not.equal(null);
 
-        swapTunnelContract = await swapTunnelDeployer({
-            // deploy SwapTunnel contract
+        uTransmuteContract = await uTransmuteDeployer({
+            // deploy uTransmute contract
             http_provider: ganacheProvider,
-            contract_file: '../swaptunnel/build/contracts/SwapTunnelEosAccount.json',
+            contract_file: '../utransmute/build/contracts/uTransmuteEosAccount.json',
             sender: identities[0].address,
             erc20_address: erc20Contract.options.address,
             critic_block: 0,
@@ -54,7 +54,7 @@ describe('swap ERC20 tokens', () => {
             gas: 3000000,
             gasPrice: 20
         });
-        swapTunnelContract.should.not.equal(null);
+        uTransmuteContract.should.not.equal(null);
 
         // transfer ERC20 tokens to accounts
         const amount = 10;
@@ -63,38 +63,38 @@ describe('swap ERC20 tokens', () => {
         }
     });
 
-    it('SwapTunnel is opened', async () => {
-        // Check SwapTunnel is not closed
-        swapTunnelContract.methods.closed().call({ from: identities[0].address }).should.eventually.be.false;
+    it('uTransmute is opened', async () => {
+        // Check uTransmute is not closed
+        uTransmuteContract.methods.closed().call({ from: identities[0].address }).should.eventually.be.false;
     });
 
     it('teloportToAccount', async () => {
         let count = 0;
 
-        wormHole({ swapTunnel: swapTunnelContract, onData: () => count++ });
+        wormHole({ uTransmute: uTransmuteContract, onData: () => count++ });
 
         for (let i = 0; i < identitiesCount; i++) {
             let amount = await erc20Contract.methods.balanceOf(identities[i].address).call({ from: identities[i].address , gas: 3000000});
-            await erc20Contract.methods.approve(swapTunnelContract.options.address, amount).send({ from: identities[i].address , gas: 3000000});
-            const allowed = await erc20Contract.methods.allowance(identities[i].address, swapTunnelContract.options.address).call();
+            await erc20Contract.methods.approve(uTransmuteContract.options.address, amount).send({ from: identities[i].address , gas: 3000000});
+            const allowed = await erc20Contract.methods.allowance(identities[i].address, uTransmuteContract.options.address).call();
             allowed.should.be.equal(amount);
-            await swapTunnelContract.methods.swap("te.mgr5ymass").send({ from: identities[i].address , gas: 3000000});
+            await uTransmuteContract.methods.transmute("te.mgr5ymass").send({ from: identities[i].address , gas: 3000000});
             result = await erc20Contract.methods.balanceOf(identities[i].address).call({ from: identities[i].address , gas: 3000000});
             result.should.be.equal('0');
         }
         count.should.be.equal(identitiesCount);
     });
 
-    it('wormhole gets past swapping', async () => {
+    it('wormhole gets past transmuting', async () => {
         let count = 0;
-        wormHole({ swapTunnel: swapTunnelContract, onData: () => count++ });
+        wormHole({ uTransmute: uTransmuteContract, onData: () => count++ });
 
         for (let i = 0; i < 2; i++) {
             let tokenBalance = await erc20Contract.methods.balanceOf(identities[i].address).call({ from: identities[i].address , gas: 3000000});
-            await erc20Contract.methods.approve(swapTunnelContract.options.address, tokenBalance).send({ from: identities[i].address , gas: 3000000});
-            const allowed = await erc20Contract.methods.allowance(identities[i].address, swapTunnelContract.options.address).call();
+            await erc20Contract.methods.approve(uTransmuteContract.options.address, tokenBalance).send({ from: identities[i].address , gas: 3000000});
+            const allowed = await erc20Contract.methods.allowance(identities[i].address, uTransmuteContract.options.address).call();
             allowed.should.be.equal(tokenBalance);
-            await swapTunnelContract.methods.swap("te.mgr5ymass").send({ from: identities[i].address , gas: 3000000});
+            await uTransmuteContract.methods.transmute("te.mgr5ymass").send({ from: identities[i].address , gas: 3000000});
             tokenBalance = await erc20Contract.methods.balanceOf(identities[i].address).call({ from: identities[i].address , gas: 3000000});
             tokenBalance.should.be.equal('0');
         }
