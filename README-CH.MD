@@ -88,7 +88,7 @@ _uTransmute代码是开源的，我们鼓励所有人定制、派生和使用代
 - ._uTransmute 可以在共享相同私匙的任何一个链上创建公匙。_
 - ._uTransmute__可以用于验证EOS与ETH交易。_
 - ._uTransmute 可以用于在EOS __子链__ 间转移代币。_
-- ._可以改写uTransmute uTransmute合约，用于支持其它的Ethereum分支链，例如GoChain，和其他支持代币类似于 __Stellar__ 的链。_
+- ._可以改写uTransmute合约，用于支持其它的Ethereum分支链，例如GoChain，和其他支持代币类似于 __Stellar__ 的链。_
 
 # 端到端测试
 

@@ -1,4 +1,4 @@
-# uTransmute uTransmute
+# uTransmute
 Transmute your ERC20 tokens to EOS tokens.
 
 ## Summary
@@ -71,7 +71,7 @@ Please read [CONTRIBUTING.md](https://github.com/UdotCASH/uTransmute/CONTRIBUTIN
 * *uTransmute could create public keys on either chain which share the same private key.*
 * *uTransmute could be used to authenticate ETH transactions using EOS or vice-versa.*
 * *uTransmute can be used to move tokens between EOS sister-chains.*
-* *uTransmute uTransmute contract could be rewritten to support other Ethereum forks chains such as GoChain, or other chains that support tokens such as Stellar.*
+* *uTransmute contract could be rewritten to support other Ethereum forks chains such as GoChain, or other chains that support tokens such as Stellar.*
 
 
 # End-to-End Testing
