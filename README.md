@@ -1,15 +1,15 @@
-# ETHxEOS SwapTunnel
+# uTransmute SwapTunnel
 Swap your ERC20 tokens to EOS tokens.
 
 ## Summary
 
-ETHxEOS is a protocol to enable cross-chain ⛓ token swapping between ETH and EOS.
+uTransmute is a protocol to enable cross-chain ⛓ token swapping between ETH and EOS.
 
-* ETH (ERC20)  --> ETHxEOS --> EOS (tokens)
+* ETH (ERC20)  --> uTransmute --> EOS (tokens)
 
 The goal of this protocol is to provide a standard for app developers to move their tokens and apps between chains, enabling greater decentralization, redundancy and usage.
 
-Join the main [U.CASH Telegram group](https://t.me/ucash) to discuss ETHxEOS and its impact on the greater ecosystem.
+Join the main [U.CASH Telegram group](https://t.me/ucash) to discuss uTransmute and its impact on the greater ecosystem.
 
 ## Built With
 * [EOS.IO](https://github.com/EOSIO/eos) - EOS Blockchain
@@ -19,15 +19,15 @@ Join the main [U.CASH Telegram group](https://t.me/ucash) to discuss ETHxEOS and
 * [node.js](https://nodejs.org) - Javascript runtime (tested with v8.10 and 10.11)
 * [cmake](https://cmake.org/) - Packaging
 
-## ETHxEOS Overview
+## uTransmute Overview
 
 We believe that any token should be able to move as the developers desire or require as their apps may be best run on different chains at different times.
 
 Typically, the way this has been done is by using what we call the "snapshot" method. 📸  This method is commonly used by token "airdrops" to send to accounts on ETH or EOS chains that match certain criteria such as having an address with at least X balance of the chain's native token. The EOS native token generation from the ERC20 was a snapshot airdrop. EOS was able to do this by expiring their ERC20 contract thereby making the ERC20 EOS tokens non-fungible.
 
-In the ETHxEOS protocol, we are providing another option for ERC20 contracts that do not have a built-in pause/expiry function but who want to move their token to another chain. We are calling this action: swap. To swap a token from one chain to another, it will exist on the destination chain, but no longer exist in a fungible form on the source chain.
+In the uTransmute protocol, we are providing another option for ERC20 contracts that do not have a built-in pause/expiry function but who want to move their token to another chain. We are calling this action: swap. To swap a token from one chain to another, it will exist on the destination chain, but no longer exist in a fungible form on the source chain.
 
-#### The ETHxEOS Protocol has 3 Dimensions
+#### The uTransmute Protocol has 3 Dimensions
 
 * **Dimension 1** is on the source chain, Ethereum. There is a SwapTunnel 🌌 contract on ETH to perform the absorption of ERC20 tokens and also to receive account information for the destination chain (EOS). This information can either be configured to use the EOS Account name or an EOS Public Key. In the second case, the oracle must be changed to create an EOS account for the user.
 * **Dimension 2** is an Oracle 🔮 program that runs off-chain to watch the ETH transactions and authorize the distribution of EOS tokens (in a future version of this protocol, the Oracle could be run entirely on EOS).
@@ -40,10 +40,10 @@ Once a user sends their tokens and destination account to the SwapTunnel, the ER
 The developer can choose to either send the tokens to a 0X000 address and thereby 🔥 them, or hold them in the SwapTunnel contract.
 
 
-##### ETHxEOS Github Inventory
-* **ETHxEOS/ETHxEOS.js** - Oracle for managing swap of tokens from ETH to EOS
-* **ETHxEOS/[config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)** - configuration file for swaptunnel and oracle contracts
-* **ETHxEOS/swaptunnel/contracts/** - swaptunnel contracts listed below
+##### uTransmute Github Inventory
+* **uTransmute/uTransmute.js** - Oracle for managing swap of tokens from ETH to EOS
+* **uTransmute/[config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json)** - configuration file for swaptunnel and oracle contracts
+* **uTransmute/swaptunnel/contracts/** - swaptunnel contracts listed below
     * **SwapTunnel.sol**	- swaptunnel contract that will attract ERC20 tokens
     * **SwapTunnelEosAccount.sol**	- swaptunnel contract that takes an EOS Account as an input to activate a swap
     * **SwapTunnelEosPublicKey.sol** - takes an EOS public key as an input to activate a swap (you will need to create  accounts using a modified oracle for account creation)
@@ -52,26 +52,26 @@ The developer can choose to either send the tokens to a 0X000 address and thereb
     * **EosValidator.sol** - validates EOS account or key
 
 
-* **ETHxEOS/swaptunnel/migrations/** - scripts for deploying truffle test
-* **ETHxEOS/swaptunnel/test/** - truffle tests of the swaptunnel
-* **ETHxEOS/eosio.token/** - standard EOSIO token contracts for testing from EOS.IO github
-* **ETHxEOS/utils/** - error checking script.
-* **ETHxEOS/package.json** - NPM installer for test suite
+* **uTransmute/swaptunnel/migrations/** - scripts for deploying truffle test
+* **uTransmute/swaptunnel/test/** - truffle tests of the swaptunnel
+* **uTransmute/eosio.token/** - standard EOSIO token contracts for testing from EOS.IO github
+* **uTransmute/utils/** - error checking script.
+* **uTransmute/package.json** - NPM installer for test suite
 
 # Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/UdotCASH/ETHxEOS/CONTRIBUTING.md)
+Please read [CONTRIBUTING.md](https://github.com/UdotCASH/uTransmute/CONTRIBUTING.md)
 
-*ETHxEOS is open-source and we encourage you to customize, fork, and use the code. We built this as a example case. Some of the ideas we have include:*
+*uTransmute is open-source and we encourage you to customize, fork, and use the code. We built this as a example case. Some of the ideas we have include:*
 
-* *ETHxEOS contracts could be modified to power a snapshot distribution using registration of EOS accounts or keys.*
-* *ETHxEOS "swapper" or "oracle" could be written to run entirely on an EOS chain (instead of node.js) and simplified payment verification (SPV) could be done entirely on-chain.*
-* *ETHxEOS contracts could be modified to burn ETH tokens by sending them to a 0x00 address after the Oracle successfully moves them to EOS.*
-* *ETHxEOS could be modified to allow tokens to travel both ways in the Swapper ETH ↔ EOS by using a "2-way-peg" of tokens - locking the tokens inside of a contract on each chain.*
-* *ETHxEOS could create public keys on either chain which share the same private key.*
-* *ETHxEOS could be used to authenticate ETH transactions using EOS or vice-versa.*
-* *ETHxEOS can be used to move tokens between EOS sister-chains.*
-* *ETHxEOS SwapTunnel contract could be rewritten to support other Ethereum forks chains such as GoChain, or other chains that support tokens such as Stellar.*
+* *uTransmute contracts could be modified to power a snapshot distribution using registration of EOS accounts or keys.*
+* *uTransmute "swapper" or "oracle" could be written to run entirely on an EOS chain (instead of node.js) and simplified payment verification (SPV) could be done entirely on-chain.*
+* *uTransmute contracts could be modified to burn ETH tokens by sending them to a 0x00 address after the Oracle successfully moves them to EOS.*
+* *uTransmute could be modified to allow tokens to travel both ways in the Swapper ETH ↔ EOS by using a "2-way-peg" of tokens - locking the tokens inside of a contract on each chain.*
+* *uTransmute could create public keys on either chain which share the same private key.*
+* *uTransmute could be used to authenticate ETH transactions using EOS or vice-versa.*
+* *uTransmute can be used to move tokens between EOS sister-chains.*
+* *uTransmute SwapTunnel contract could be rewritten to support other Ethereum forks chains such as GoChain, or other chains that support tokens such as Stellar.*
 
 
 # End-to-End Testing
@@ -82,11 +82,11 @@ Please read [CONTRIBUTING.md](https://github.com/UdotCASH/ETHxEOS/CONTRIBUTING.m
 
 *Our scripts automate some of this process, but this is to help you understand what each step is in the process.*
 
-1. **Create token on Ethereum.** *Truffle does this. (4 tokens will be notated as 40000 with 4 decimals in Ethereum contract - configure this in the [config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)).*
+1. **Create token on Ethereum.** *Truffle does this. (4 tokens will be notated as 40000 with 4 decimals in Ethereum contract - configure this in the [config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json)).*
 2. **Distribute new tokens to fresh Ethereum account.** *Truffle does this.*
 3. **Deploy swaptunnel contract.** *Contract address will automatically update in the truffle config file).*
 4. **Deploy standard eosio.token contract on Jungle Testnet.**
-5. **Issue EOS token via eosio.token contract.** *Parameters are configured in [config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)*
+5. **Issue EOS token via eosio.token contract.** *Parameters are configured in [config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json)*
 6. **Start teleport_oracle on node.js server.**
 7. **Source Ethereum account must send 2 actions.**
     * Authorize swaptunnel to swap an amount of ERC20 tokens.
@@ -97,7 +97,7 @@ Please read [CONTRIBUTING.md](https://github.com/UdotCASH/ETHxEOS/CONTRIBUTING.m
 ### Ganache / Jungle Testing Prerequisites
 * [Truffle](https://truffleframework.com) - `npm install -g truffle`
 * [Ganache](https://truffleframework.com/ganache) - One click local Ethereum blockchain  
-    * *Ganache should be configured to run locally on port 8545 (you may need to set this port in Ganache preferences or edit [config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json) to match the port number.)*
+    * *Ganache should be configured to run locally on port 8545 (you may need to set this port in Ganache preferences or edit [config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json) to match the port number.)*
 
 ### Ganache / Jungle Testing Preparation
 * [Create EOS Account on Jungle Testnet. GUI](http://dev.cryptolions.io/#account) *This will be our EOSTokenCreatorAccount.*
@@ -119,8 +119,8 @@ Please read [CONTRIBUTING.md](https://github.com/UdotCASH/ETHxEOS/CONTRIBUTING.m
 
 ## Step 1: Truffle Deployment of Ethereum Contracts (ERC20 token + SwapTunnel)
 
-* **Clone ETHxEOS repository**
-   * `git clone https://github.com/UdotCASH/ETHxEOS.git`
+* **Clone uTransmute repository**
+   * `git clone https://github.com/UdotCASH/uTransmute.git`
 
 * ** Compile the EOS token contract**
    * `cd eosio.token`
@@ -149,14 +149,14 @@ Please read [CONTRIBUTING.md](https://github.com/UdotCASH/ETHxEOS/CONTRIBUTING.m
     * `truffle test`
 
 
-* ** Deploy ERC20 contract and the swaptunnel contract defined in [config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)**
+* ** Deploy ERC20 contract and the swaptunnel contract defined in [config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json)**
     * `truffle migrate --reset --network ganache`
     * *This process will also send your newly created ERC20 tokens to your first account in the Ganache interface.*
 
 ## Step 2: Deploy Oracle
-* ** Start the oracle from the root of the ETHxEOS project**
+* ** Start the oracle from the root of the uTransmute project**
   * *Open another session - or even better [screen](https://www.rackaid.com/blog/linux-screen-tutorial-and-how-to/) the command.*
-  * `node ./ETHxEOS.js`
+  * `node ./uTransmute.js`
 
 ## Step 3: Deploy EOS Token Contract
 * ** Deploy standard EOSIO.token contract**
@@ -212,7 +212,7 @@ SOFTWARE.
 
 #### Testing Preparation
 * You must have ERC20 token deployed on Ethereum mainnet, EOS token deployed on EOS mainnet, and have the keys that have permission to transfer the EOS token loaded in a wallet where the oracle will be running.
-* In [config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json) configure `swaptunnel` and `eosiotoken` sections to your token parameters.
+* In [config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json) configure `swaptunnel` and `eosiotoken` sections to your token parameters.
     * `websocket_provider` will point to Ethereum node - on mainnet use `wss://mainnet.infura.io/ws`
     * `critic_block` will be the Ethereum block number that you want the swaptunnel contract to expire, set to 0 if it never expires.
     * `decimals` `symbol` and `tokens` will be the number of decimals defined in your ERC20 token contract, the symbol of your ERC20 token, and the maximum amount of tokens in your ERC20 contract.
@@ -220,8 +220,8 @@ SOFTWARE.
     * `http_endpoint` points to an EOS API node
     * `account` is the account that has transfer permission of your issued EOS token address
     * `private_key` private key that can has permission to transfer the EOS token
-* Install `ETHxEOS/swaptunnel/contracts/SwapTunnelEosAccount.sol` or `swaptunnel/contracts/SwapTunnelEosPublicKey.sol` on Ethereum mainnet
-* Start the Oracle 🔮 ETHxEOS/oracle/SwapOracle.js
+* Install `uTransmute/swaptunnel/contracts/SwapTunnelEosAccount.sol` or `swaptunnel/contracts/SwapTunnelEosPublicKey.sol` on Ethereum mainnet
+* Start the Oracle 🔮 uTransmute/oracle/SwapOracle.js
 * From an Ethereum account containing tokens you want to swap, authorize the swaptunnel to attract tokens from your account, then send your EOS account name to the contract "swap" action to initiate the movement of tokens to EOS. *This process could be made really simple through very good UX/UI design for an interface.*
 
 

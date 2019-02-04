@@ -1,4 +1,4 @@
-# ETHxEOS 协议
+# uTransmute 协议
 
 将您的ERC20代币传送到EOS。
 
@@ -6,13 +6,13 @@
 
 ## 概述
 
-ETHxEOS协议可以实现ETH和EOS跨链代币转移。
+uTransmute协议可以实现ETH和EOS跨链代币转移。
 
-- .ETH (ERC20) –\&gt; ETHxEOS –\&gt; EOS (代币)
+- .ETH (ERC20) –\&gt; uTransmute –\&gt; EOS (代币)
 
 本协议的目标是为app开发人员提供一个基础标准，来实现跨链操作代币和app。
 
-尽请加入Join the main U.CASH Telegram group(https://t.me/ucash) 共同讨论ETHxEOS。同时也诚挚欢迎您为https://github.com/UdotCASH/ETHxEOS节点投票。
+尽请加入Join the main U.CASH Telegram group(https://t.me/ucash) 共同讨论uTransmute。同时也诚挚欢迎您为https://github.com/UdotCASH/uTransmute节点投票。
 
 ## 协议基础
 
@@ -24,7 +24,7 @@ ETHxEOS协议可以实现ETH和EOS跨链代币转移。
 - .[node.js](https://nodejs.org/) - Javascript 运行环境 (测试版本为 v8.10 和11)
 - .[cmake](https://cmake.org/) - 包
 
-## ETHxEOS 概览
+## uTransmute 概览
 
 We believe that any token should be able to move as the developers desire or require as their apps may be best run on different chains at different times.
 
@@ -34,11 +34,11 @@ Typically, the way this has been done is by using what we call the &quot;snapsho
 
 通常情况下，实现上述要求我们是借助&quot;快照&quot;模式完成。
 
-In the ETHxEOS protocol, we are providing another option for ERC20 contracts that do not have a built-in pause/expiry function but who want to move their token to another chain. We are calling this action: swapping. To swap a token from one chain to another, it will exist on the destination chain, but no longer exist in a fungible form on the source chain.
+In the uTransmute protocol, we are providing another option for ERC20 contracts that do not have a built-in pause/expiry function but who want to move their token to another chain. We are calling this action: swapping. To swap a token from one chain to another, it will exist on the destination chain, but no longer exist in a fungible form on the source chain.
 
-在ETHxEOS协议里，我们为没有内置暂停/到期功能且不能满足想要跨链转移代币的用户的ERC20合约提供了另一种方式。我们将此需求称为：swapping隐形转移。链间转移一个代币，此代币将存在于目的链，但在源链上不再以可替换形式存在。
+在uTransmute协议里，我们为没有内置暂停/到期功能且不能满足想要跨链转移代币的用户的ERC20合约提供了另一种方式。我们将此需求称为：swapping隐形转移。链间转移一个代币，此代币将存在于目的链，但在源链上不再以可替换形式存在。
 
-#### ETHxEOS协议有3个维度
+#### uTransmute协议有3个维度
 
 - . **维度**** 1**  是源链，Ethereum。此处有一个SwapTunnel合约。
 - . **维度**** 2** 是 一个Oracle。
@@ -56,39 +56,39 @@ The developer can choose to either send the tokens to a 0X000 address and thereb
 
 开发人员可以选择将代币发送到0X000地址，也可以将它们保留在SwapTunnel合约。
 
-##### ETHxEOS GitHub 详细目录
+##### uTransmute GitHub 详细目录
 
-- . **ETHxEOS/ETHxEOS.js**  - Oracle 负责管理代币从ETH到EOS转移。
-- . **ETHxEOS/** [**config.json**](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json) - swaptunnel和Oracle合约的配置文件
-- . **ETHxEOS/swaptunnel/**** 合约 ****/**  - swaptunnel合约如下
+- . **uTransmute/uTransmute.js**  - Oracle 负责管理代币从ETH到EOS转移。
+- . **uTransmute/** [**config.json**](https://github.com/UdotCASH/uTransmute/blob/master/config.json) - swaptunnel和Oracle合约的配置文件
+- . **uTransmute/swaptunnel/**** 合约 ****/**  - swaptunnel合约如下
   - . **sol** - swaptunnel合约吸收ERC20代币。
   - . **sol** - swaptunnel 合约将EOS账户作为一个输入来激活代币传输操作。
   - . **sol**  - 将一个EOS公匙作为一个输入激活代币传输操作。（您需要使用修改后的Oracle创建账户）
   - . **sol**  - 用于为测试部署指定 ElementToken.sol
   - . **sol**  - 对ERC20代币的默认ElementToken合约
   - . **sol**  - 确认EOS账户或钥匙
-- . **ETHxEOS/swaptunnel/migrations/**  - 部署truffle测试的脚本
-- . **ETHxEOS/swaptunnel/test/**  -swaptunnel的 truffle 测试
-- . **ETHxEOS/eosio.token/**  - 来自EOS.IO GitHub的标准EOSIO代币合约测试
-- . **ETHxEOS/utils/**  - 错误检查脚本
-- . **ETHxEOS/package.json**  - 测试套件的NPM安装包
+- . **uTransmute/swaptunnel/migrations/**  - 部署truffle测试的脚本
+- . **uTransmute/swaptunnel/test/**  -swaptunnel的 truffle 测试
+- . **uTransmute/eosio.token/**  - 来自EOS.IO GitHub的标准EOSIO代币合约测试
+- . **uTransmute/utils/**  - 错误检查脚本
+- . **uTransmute/package.json**  - 测试套件的NPM安装包
 
 # 贡献
 
-欢迎阅读 [CONTRIBUTING.md](https://github.com/UdotCASH/ETHxEOS/CONTRIBUTING.md)
+欢迎阅读 [CONTRIBUTING.md](https://github.com/UdotCASH/uTransmute/CONTRIBUTING.md)
 
-_ETHxEOS is open-source and we encourage you to customize, fork, and use the code. We built this as a__n_ _example case. Some of the ideas we have include:_
+_uTransmute is open-source and we encourage you to customize, fork, and use the code. We built this as a__n_ _example case. Some of the ideas we have include:_
 
-_ETHxEOS代码是开源的，我们鼓励所有人定制、派生和使用代码。我们建立它是作为一个基石。以下是我们的一些想法：_
+_uTransmute代码是开源的，我们鼓励所有人定制、派生和使用代码。我们建立它是作为一个基石。以下是我们的一些想法：_
 
-- ._可以修改ETHxEOS合约，使用注册EOS账户或钥匙来驱动快照分配。_
-- ._可以编写ETHxEOS&quot; __tswapper__&quot;或 __&quot;__ racle&quot;，从而完全在EOS链上运行（代替了 __js__ ），并且简化的支付认证过程（SPV）也可完全在链上进行。_
-- ._可以修改ETHxEOS合约，在Oracle成功将ETH代币转移至EOS后，通过将此部分ETH代币发送到0x00地址来完成代币燃烧。_
-- ._可以修改ETHxEOS合约，允许代币在传送点ETH_ _↔ __EOS间传送，通过使用__&quot; __2-通道__&quot;__代币，锁定代币不再是靠每条链单独的合约。_
-- ._ETHxEOS 可以在共享相同私匙的任何一个链上创建公匙。_
-- ._ETHxEOS__可以用于验证EOS与ETH交易。_
-- ._ETHxEOS 可以用于在EOS __子链__ 间转移代币。_
-- ._可以改写ETHxEOS SwapTunnel合约，用于支持其它的Ethereum分支链，例如GoChain，和其他支持代币类似于 __Stellar__ 的链。_
+- ._可以修改uTransmute合约，使用注册EOS账户或钥匙来驱动快照分配。_
+- ._可以编写uTransmute&quot; __tswapper__&quot;或 __&quot;__ racle&quot;，从而完全在EOS链上运行（代替了 __js__ ），并且简化的支付认证过程（SPV）也可完全在链上进行。_
+- ._可以修改uTransmute合约，在Oracle成功将ETH代币转移至EOS后，通过将此部分ETH代币发送到0x00地址来完成代币燃烧。_
+- ._可以修改uTransmute合约，允许代币在传送点ETH_ _↔ __EOS间传送，通过使用__&quot; __2-通道__&quot;__代币，锁定代币不再是靠每条链单独的合约。_
+- ._uTransmute 可以在共享相同私匙的任何一个链上创建公匙。_
+- ._uTransmute__可以用于验证EOS与ETH交易。_
+- ._uTransmute 可以用于在EOS __子链__ 间转移代币。_
+- ._可以改写uTransmute SwapTunnel合约，用于支持其它的Ethereum分支链，例如GoChain，和其他支持代币类似于 __Stellar__ 的链。_
 
 # 端到端测试
 
@@ -102,11 +102,11 @@ _Our scripts automate some of this process, but this is to help you understand w
 
 _我们的脚本自动化了一些流程，这是为了帮助您理解流程中的每一步。_
 
-1. **Create token on Ethereum.**** 在Ethereum上创建代币。** _Truffle_ _进行此操作。（4个代币将表示为40000，Ethereum合约中有4个小数点。 __——__ 可在_[config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)_完成配置__)._
+1. **Create token on Ethereum.**** 在Ethereum上创建代币。** _Truffle_ _进行此操作。（4个代币将表示为40000，Ethereum合约中有4个小数点。 __——__ 可在_[config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json)_完成配置__)._
 2. **向新Ethereum账户分配新代币。** _Truffle_ _进行此操作。_
 3. _ **部署swaptunnel合约。** __合约地址在truffle配置文件中自动更新。_
 4. **在**** Jungle Testnet ****部署标准eosio.token合约。**
-5. _ **通过eosio.token合约发行EOS代币。** __参数见_ [config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)_中配置。_
+5. _ **通过eosio.token合约发行EOS代币。** __参数见_ [config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json)_中配置。_
 6. **在**** js ****服务器上建立**** swap\_oracle ****。**
 7. **源Ethereum账户必须进行2个操作。**
 
@@ -121,7 +121,7 @@ _我们的脚本自动化了一些流程，这是为了帮助您理解流程中�
 
 - .[Truffle](https://truffleframework.com/) - npm install -g truffle
 - .[Ganache](https://truffleframework.com/ganache) - 点击本地Ethereum区块链。
-  - ._Ganache __应该被配置在8545端口上进行本地运行。（您可能需要在__ Ganache__首选项设置或编辑_ [config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)匹配端口_）_
+  - ._Ganache __应该被配置在8545端口上进行本地运行。（您可能需要在__ Ganache__首选项设置或编辑_ [config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json)匹配端口_）_
 
 ### Ganache / Jungle测试准备
 
@@ -136,8 +136,8 @@ _我们的脚本自动化了一些流程，这是为了帮助您理解流程中�
 
 ## 步骤1：Ethereum合约的Truffle发展。（ERC20代币+SwapTunnel）
 
-- . **克隆ETHxEOS 资源库**
-  - .git clone https://github.com/UdotCASH/ETHxEOS.git
+- . **克隆uTransmute 资源库**
+  - .git clone https://github.com/UdotCASH/uTransmute.git
   - .mkdir build
   - .cd build
 - .\*\*编译swaptunnel合约\*\*
@@ -152,15 +152,15 @@ _我们的脚本自动化了一些流程，这是为了帮助您理解流程中�
   - .cd swaptunnel &amp;&amp; truffle compile
 - . \*\*测试合约\*\*
   - .truffle test
-- .\*\*部署ERC20合约和在 [config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)中定义swaptunnel合约。\*\*
+- .\*\*部署ERC20合约和在 [config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json)中定义swaptunnel合约。\*\*
   - .truffle migrate --reset --network ganache
   - ._进程还将把你新创建的ERC20代币发送到你在 __Ganache__ 界面的第一个账户。_
 
 ## 步骤2：部署Oracle
 
-- .\*\*从ETHxEOS 项目的根文件开始oracle\*\*
+- .\*\*从uTransmute 项目的根文件开始oracle\*\*
   - ._打开另一个窗口 __——__ 或者更好在窗口展示命令。_
-  - .node ./ETHxEOS.js
+  - .node ./uTransmute.js
 
 ## 步骤3：部署EOS代币合约
 
@@ -202,7 +202,7 @@ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 #### 测试准备
 
 - .你必须在Ethereum主网上部署ERC20代币，获得钥匙能够允许将EOS代币传送到oracle运行的钱包。
-- .在[config.json](https://github.com/UdotCASH/ETHxEOS/blob/master/config.json)配置swaptunnel 和 eosiotoken部分到您的代币参数
+- .在[config.json](https://github.com/UdotCASH/uTransmute/blob/master/config.json)配置swaptunnel 和 eosiotoken部分到您的代币参数
   - .websocket\_provider 将指向 Ethereum 节点 - 在主网上使用wss://mainnet.infura.io/ws
   - .critic\_block 将是您想要到期swaptunnel合约在Ethereum上的块编号，如果它未到期，则将其设置为0。
   - .decimals symbol 和 tokens 是您在ERC20代币合约中定义的小数点，ERC20代币的表示符号，在ERC20合约中的最大代币数额。
@@ -210,7 +210,7 @@ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRES
   - .http\_endpoint 指向一个EOS API节点
   - .account 是具备您分发EOS代币地址权限的账户
   - .private\_key 私匙是代表传输EOS代币的权利。
-- .在Ethereum主网上安装ETHxEOS/swaptunnel/contracts/SwapTunnelEosAccount.sol orswaptunnel/contracts/SwapTunnelEosPublicKey.sol
+- .在Ethereum主网上安装uTransmute/swaptunnel/contracts/SwapTunnelEosAccount.sol orswaptunnel/contracts/SwapTunnelEosPublicKey.sol
 - .开始Oracle
 - ._从一个包含您想要传送的代币的Ethereum账户中，授权swaptunnel从您的账户中吸收代币，然后将您的EOS账户名称发送到合约 __&quot;__ 传送点 __&quot;__ 触发代币转移操作。通过非常好的UX/UI设计，可以是这个过程变得非常简单。_
 
@@ -219,8 +219,8 @@ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRES
 
 This software is a fork of the original [EOS21 Protocol](https://github.com/sheos-org/eos21) by the team at [shEOS](http://sheos.org) released under an MIT License.  This project is made available under the same license for the community - see the [LICENSE.md](LICENSE.md) file for details.
 
-本项目获得 MIT许可——查看详细细节[LICENSE.md](https://github.com/UdotCASH/ETHxEOS/LICENSE.md)
+本项目获得 MIT许可——查看详细细节[LICENSE.md](https://github.com/UdotCASH/uTransmute/LICENSE.md)
 
-[**ETHxEOS**](https://github.com/UdotCASH/ETHxEOS) ** is maintained by ** [**https://github.com/UdotCASH/**](https://github.com/UdotCASH/)
+[**uTransmute**](https://github.com/UdotCASH/uTransmute) ** is maintained by ** [**https://github.com/UdotCASH/**](https://github.com/UdotCASH/)
 
-[**ETHxEOS**](https://github.com/UdotCASH/ETHxEOS) ** **** 由**[**https://github.com/UdotCASH/**](https://github.com/UdotCASH/)**维护
+[**uTransmute**](https://github.com/UdotCASH/uTransmute) ** **** 由**[**https://github.com/UdotCASH/**](https://github.com/UdotCASH/)**维护
